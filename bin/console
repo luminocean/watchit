@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "watchit"
+
+# 进入pry调试环境
+require "pry"
+Pry.start
