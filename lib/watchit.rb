@@ -1,9 +1,12 @@
 require "watchit/version"
+require 'sinatra/base'
 
 module Watchit
-    def run
-        p 'This is a test run!'
-    end
+    class WatchitApp < Sinatra::Application
+        get '/' do
+            'Hello my dear friend!'
+        end
 
-    module_function :run
+        run!
+    end
 end

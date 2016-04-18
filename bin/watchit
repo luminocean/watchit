@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "slop"
+require "sinatra/base"
+
+module Watchit
+    # 入参解析
+    opts = Slop.parse({ help: true, strict: true }) do
+      banner 'Usage: watchit [options]'
+
+      on 'w=', 'watch=', 'Watch path'
+      on 'p=', 'port=', 'Server port'
+      on 'v', 'version', 'Version' do
+    	  puts Slop::VERSION
+          exit
+      end
+    end
+
+    # 监视路径与端口
+    Watch_path = opts[:path] || Dir.pwd
+    Watch_port = opts[:port] || 8080
+
+    # 配置
+    class WatchitApp < Sinatra::Application
+        configure do
+            set :public_folder, Watchit::Watch_path
+            set :port, Watchit::Watch_port
+        end
+    end
+
+    # 启动Watchit服务器
+    # 本句会在require_paths中搜索
+    require 'watchit'
+end
