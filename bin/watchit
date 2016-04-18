@@ -18,13 +18,13 @@ module Watchit
     end
 
     # 监视路径与端口
-    Watch_path = opts[:path] || Dir.pwd
+    Watch_path = File.absolute_path(opts[:watch] || Dir.pwd) # 绝对路径
     Watch_port = opts[:port] || 8080
 
     # 配置
     class WatchitApp < Sinatra::Application
         configure do
-            set :public_folder, Watchit::Watch_path
+            # set :public_folder, Watchit::Watch_path
             set :port, Watchit::Watch_port
         end
     end
