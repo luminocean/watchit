@@ -1,6 +1,5 @@
 require "watchit/version"
 require 'sinatra/base'
-
 require 'watchit/injection'
 
 module Watchit
