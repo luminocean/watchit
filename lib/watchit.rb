@@ -1,13 +1,21 @@
 require 'erb'
+require 'json'
 require "watchit/version"
 require 'sinatra/base'
 require 'watchit/injection'
 require 'watchit/render'
+require 'watchit/file_system'
 
 module Watchit
     class WatchitApp < Sinatra::Application
         include Watchit::Injection
         include Watchit::Render
+        include Watchit::FileSystem
+
+        get '/mtime' do
+            content_type :json
+            {:mtime => dir_mtime(Watchit::Watch_path).serilize}.to_json
+        end
 
         get '/*' do
             # 请求路径

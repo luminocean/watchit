@@ -22,6 +22,10 @@ module Watchit
 				lastest = mtime if lastest < mtime
 			end
 
+			def lastest.serilize
+				"#{self.year}/#{self.month}/#{self.day}/#{self.hour}/#{self.min}/#{self.sec}"
+			end
+
 			Dir.chdir old_dir
 			return lastest
 		end

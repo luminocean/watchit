@@ -16,7 +16,7 @@ module Watchit
 
 			# 监视路径的修改时间
 			mtime = dir_mtime Watchit::Watch_path
-			time_str = "#{mtime.year}/#{mtime.month}/#{mtime.day}/#{mtime.hour}/#{mtime.min}/#{mtime.sec}"
+			time_str = mtime.serilize
 
 			script = script_file.read
 			script = script.sub(/{{MODIFIED_TIME}}/, time_str)
