@@ -1,10 +1,19 @@
 require "watchit/version"
 require 'sinatra/base'
 require 'watchit/injection'
+require 'erb'
 
 module Watchit
     class WatchitApp < Sinatra::Application
         include Watchit::Injection
+
+        get '/' do
+            file_list = Dir.entries(Watchit::Watch_path)
+                .select{|name| !name.start_with? '.'}
+            erb :file_list, :locals => {
+                :file_list => file_list
+            }
+        end
 
         get '/*' do
             # 请求路径
@@ -23,7 +32,7 @@ module Watchit
                 content_type :html
                 # 注入文本
                 inject content
-            # 不需要插入，直接返回
+            # 不需要插入，直接返回文件内容
             else
                 send_file location
             end

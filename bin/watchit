@@ -26,6 +26,7 @@ module Watchit
         configure do
             # set :public_folder, Watchit::Watch_path
             set :port, Watchit::Watch_port
+            set :views, File.expand_path('../../lib/watchit/views', __FILE__)
         end
     end
 
