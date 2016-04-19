@@ -1,9 +1,12 @@
 <!DOCTYPE>
 <html>
 <body>
-	<h3>HI</h3>
-	<% file_list.each do |file| %>
-		<p><a href=./<%=file%>><%=file%></a></p>
-	<% end %>
+	<p>Welcome to Wathit!</p>
+	<p>Files(directories) under [<%=path%>]:</p>
+	<ul>
+		<% file_list.each do |file| %>
+			<li><a href=./<%=file%>><%=file%></a></li>
+		<% end %>
+	</ul>
 </body>
 </html>

@@ -1,19 +1,13 @@
+require 'erb'
 require "watchit/version"
 require 'sinatra/base'
 require 'watchit/injection'
-require 'erb'
+require 'watchit/render'
 
 module Watchit
     class WatchitApp < Sinatra::Application
         include Watchit::Injection
-
-        get '/' do
-            file_list = Dir.entries(Watchit::Watch_path)
-                .select{|name| !name.start_with? '.'}
-            erb :file_list, :locals => {
-                :file_list => file_list
-            }
-        end
+        include Watchit::Render
 
         get '/*' do
             # 请求路径
@@ -22,6 +16,10 @@ module Watchit
             location = File.expand_path request_file_path, Watchit::Watch_path
             # 扩展名
             regex_start = (/.*\.(\w+)/ =~ request_file_path)
+
+            if File.directory? location
+                return file_list_html(location)
+            end
 
             # 为html文件插入js脚本
             if regex_start != nil && $1 == 'html'
