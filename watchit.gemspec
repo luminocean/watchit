@@ -9,11 +9,13 @@ Gem::Specification.new do |spec|
     spec.authors       = ["luminocean"]
     spec.email         = ["282896922@qq.com"]
 
-    spec.summary       = 'Modification watching and auto freshing tool'
+    spec.summary       = 'Frontend modification listening and auto-refreshing tool'
     spec.files         = `git ls-files -z`.split("\x0")
     spec.bindir        = "bin"
     spec.executables   = ["watchit"]
     spec.require_paths = ["lib"]
+    spec.license       = 'MIT'
+    spec.homepage         = 'https://github.com/luminocean/watchit'
 
     spec.add_dependency "sinatra", "~> 1.4"
     spec.add_dependency "slop", "~> 3.4"
